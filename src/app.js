@@ -5,11 +5,25 @@ const app = express();
 //     res.send("testing ");
 // })
 
-app.get("/user/:userId/:name/:pass?",(req,res)=>{
-    //console.log(req.query)
-    console.log(req.params)
-    res.send("Get user data sucessfully");
-})
+// app.get("/user/:userId/:name/:pass?",(req,res)=>{
+//     //console.log(req.query)
+//     console.log(req.params)
+//     res.send("Get user data sucessfully");
+// })
+
+app.use('/user',
+    (req,res,next)=>{
+        console.log('handling user 1');
+         next()
+        //res.send('Response 1')
+       
+    },
+    (req,res,next)=>{
+        console.log('handling user 2');
+        //res.send('Response 2')
+        next()
+    }
+)
 
 app.post("/user",(req,res)=>{
     res.send("User data sucessfully saved to DB");
