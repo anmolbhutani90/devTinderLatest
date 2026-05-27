@@ -1,7 +1,13 @@
 const express = require('express');
 const app = express();
 
-app.get("/user",(req,res)=>{
+// app.get(/a/,(req,res)=>{
+//     res.send("testing ");
+// })
+
+app.get("/user/:userId/:name/:pass?",(req,res)=>{
+    //console.log(req.query)
+    console.log(req.params)
     res.send("Get user data sucessfully");
 })
 
