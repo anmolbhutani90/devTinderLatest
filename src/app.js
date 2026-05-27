@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-
+const {adminAuth} = require('../middleware/auth');
 // app.get(/a/,(req,res)=>{
 //     res.send("testing ");
 // })
@@ -11,33 +11,26 @@ const app = express();
 //     res.send("Get user data sucessfully");
 // })
 
-app.use('/user',
-    (req,res,next)=>{
-        console.log('handling user 1');
-         next()
-        //res.send('Response 1')
-       
-    },
-    (req,res,next)=>{
-        console.log('handling user 2');
-        //res.send('Response 2')
-        next()
-    }
-)
+app.use('/admin', adminAuth);
 
-app.post("/user",(req,res)=>{
-    res.send("User data sucessfully saved to DB");
+app.use('/admin/getAllData',(req,res)=>{
+    // throw new Error('error found')
+    res.send("get all data")
 })
 
-app.delete("/user",(req,res)=>{
-    res.send("User data deleted sucessfully")
+app.use('/admin/deleteUser',(req,res)=>{
+    res.send("User deleted")
 })
 
 
 app.use("/test",(req,res)=>{
   res.send("Test Page");
 });
-
+app.use('/',(err,req,res,next)=>{
+    if(err){
+        res.status(500).send('Internal Server Error')
+    }
+})
 
 app.listen(7777,()=>{
   console.log('Server is running on port 7777');
