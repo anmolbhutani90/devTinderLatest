@@ -1,17 +1,23 @@
 const express = require('express');
 const app = express();
 
-app.use("/hello",(req,res)=>{
-  res.send("Hello World");
-});
+app.get("/user",(req,res)=>{
+    res.send("Get user data sucessfully");
+})
+
+app.post("/user",(req,res)=>{
+    res.send("User data sucessfully saved to DB");
+})
+
+app.delete("/user",(req,res)=>{
+    res.send("User data deleted sucessfully")
+})
+
 
 app.use("/test",(req,res)=>{
   res.send("Test Page");
 });
 
-app.get("/",(req,res)=>{
-  res.send("Main Page");
-});
 
 app.listen(7777,()=>{
   console.log('Server is running on port 7777');
